@@ -1,0 +1,157 @@
+@mixin icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+@mixin hw {
+  height: 100px;
+  width: 100px;
+}
+
+.Portfolio {
+  padding: 40px 0 !important;
+
+  .Footer {
+    padding: 30px 100px;
+    margin: 20px 0;
+    height: 250px;
+  }
+
+  .NavLink {
+    cursor: pointer;
+    color: #a7a7a796;
+    transition: 0.5s;
+  }
+  .active {
+    color: #ffd508;
+    font-weight: bold;
+    transition: 0.5s;
+  }
+
+  .Fio {
+    font-size: 25px;
+    font-weight: 500;
+  }
+  .FrontEnd {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: oblique;
+  }
+  .Container {
+    padding: 30px 100px;
+    margin: 20px 0;
+    box-shadow: 1px 1px 1px #ffd508;
+    background-image: linear-gradient(
+      to top right,
+      rgba(168, 168, 168, 0.21),
+      rgba(144, 142, 143, 0.33),
+      rgba(119, 116, 118, 0.45),
+      rgba(95, 89, 92, 0.56),
+      rgba(70, 63, 67, 0.68),
+      rgba(46, 37, 42, 0.8),
+      rgba(46, 38, 42, 0.8),
+      rgba(46, 39, 42, 0.81),
+      rgba(46, 40, 42, 0.81),
+      rgba(46, 40, 42, 0.81),
+      rgba(46, 41, 42, 0.82),
+      rgba(46, 42, 42, 0.82)
+    );
+
+    .Text {
+      font-size: 20px;
+      padding-left: 10px;
+      h5 {
+        width: 100%;
+        margin: 0 !important;
+      }
+      span {
+        width: 100%;
+
+        span {
+          background: #484848;
+          padding: 0 4px;
+        }
+        a {
+          padding: 0 4px;
+          color: antiquewhite;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .ProjectBox {
+    width: 300px;
+    height: 320px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .ProjectBody {
+      width: 100%;
+      height: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 30px;
+      box-shadow: 1px 1px 0px #ffd508;
+      background: #2b2626;
+      font-size: 15px;
+    }
+
+    .ProjectTitle {
+      width: 100%;
+      height: 10%;
+      display: flex;
+      padding: 10px 0;
+      justify-content: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+    }
+  }
+  .ProjectBox:hover .ProjectTitle {
+    color: yellow;
+    transition: 0.5s;
+    font-weight: bolder;
+  }
+
+  .Row {
+    padding: 20px 0;
+  }
+  .Skills {
+    font-size: 50px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+    text-transform: uppercase;
+  }
+  .gitIcon {
+    @include icon;
+    @include hw;
+    background-image: url(./icons/git.png);
+  }
+  .fwIcon {
+    @include icon;
+    @include hw;
+    background-image: url(./icons/frameworks.png);
+  }
+  .ppIcon {
+    @include icon;
+    @include hw;
+    background-image: url(./icons/preprocess.png);
+  }
+  .reactIcon {
+    @include icon;
+    @include hw;
+    background-image: url(./icons/react.png);
+  }
+  .jsIcon {
+    @include icon;
+    @include hw;
+    background-image: url(./icons/js.png);
+  }
+  .tsIcon {
+    @include icon;
+    @include hw;
+    background-image: url(./icons/ts.png);
+  }
+}

@@ -1,0 +1,56 @@
+.Application2 {
+  .FormConteiner {
+    position: fixed;
+    right: 0;
+  }
+  .ChartBox {
+    width: 700px;
+    height: 250px;
+    padding: 10px;
+    margin: 20px;
+    background-color: #312d2d;
+  }
+  .ContainerForTable {
+    background-color: transparent;
+    width: 100%;
+
+    .Table {
+      width: 100%;
+      background-color: #71717136;
+      th {
+        color: orange;
+        text-transform: uppercase;
+        background-color: #ffa50012;
+        border-bottom: 0px;
+      }
+      td {
+        color: #b3b3b3;
+        border-bottom: 1px solid orange;
+      }
+    }
+  }
+}
+
+.Form {
+  width: 250px;
+  padding: 10px;
+
+  .FieldRow {
+    width: 100%;
+    padding: 5px;
+  }
+  .ButtonRow {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+}
+
+.TablePagination {
+  background: transparent;
+  color: orange !important;
+  svg {
+    color: orange !important;
+  }
+}
