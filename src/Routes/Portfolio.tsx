@@ -11,6 +11,7 @@ function Portfolio() {
   return (
     <Grid container item xs={12} justify="center" className={cls.Portfolio}>
       <Grid
+        item
         container
         direction="column"
         justify="center"
@@ -27,25 +28,25 @@ function Portfolio() {
         <Nav />
       </Grid>
 
-      <Grid xs={8} container>
-        <Grid id="1" xs={12} container className={cls.Container}>
+      <Grid xs={8} container item>
+        <Grid id="1" item xs={12} container className={cls.Container}>
           <WithMe />
         </Grid>
-        <Grid id="2" xs={12} container className={cls.Container}>
-          <Grid xs={12} className={cls.Skills}>
+        <Grid id="2" xs={12} item container className={cls.Container}>
+          <Grid xs={12} item className={cls.Skills}>
             Навыки
           </Grid>
-          <hr style={{ width: "100%", border: "1px solid #fffe0080" }} />
+          <hr className={cls.Hr} />
           <MySkills />
         </Grid>
-        <Grid id="3" xs={12} container className={cls.Container}>
+        <Grid id="3" xs={12} item container className={cls.Container}>
           <Experience />
         </Grid>
-        <Grid id="4" xs={12} container className={cls.Container}>
+        <Grid id="4" xs={12} item container className={cls.Container}>
           <LernProject />
         </Grid>
       </Grid>
-      <Grid xs={12} container className={cls.Footer}></Grid>
+      <Grid xs={12} container item className={cls.Footer}></Grid>
     </Grid>
   );
 }
@@ -123,8 +124,8 @@ const WithMe = () => {
 
   return (
     <>
-      <Grid container xs={12}>
-        <Grid xs={3}>
+      <Grid container item xs={12}>
+        <Grid xs={3} item>
           <Box
             component="img"
             style={{
@@ -137,7 +138,7 @@ const WithMe = () => {
             }}
           />
         </Grid>
-        <Grid container xs={9} alignContent="flex-start">
+        <Grid container xs={9} item alignContent="flex-start">
           <Spring from={toggleFrom} to={toggleTo} config={{ duration: 1000 }}>
             {(props) => (
               <Grid item xs={12} className={cls.Fio} style={props}>
@@ -155,6 +156,18 @@ const WithMe = () => {
 
           <Grid item xs={12} className={cls.Row}>
             Тел: 8 985 939 73 47
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            className={cls.Row}
+            style={{
+              textTransform: "uppercase",
+              color: "orange",
+              fontWeight: "bold",
+            }}
+          >
+            React + Redux + TypeScript
           </Grid>
         </Grid>
       </Grid>
@@ -176,9 +189,9 @@ const MySkills = () => {
     <>
       <Spring from={toggleFrom} to={toggleTo} config={{ duration: 900 }}>
         {(props) => (
-          <Grid xs={12} container className={cls.Row} style={props}>
-            <Grid xs={1} className={cls.jsIcon} />
-            <Grid xs={10} className={cls.Text}>
+          <Grid xs={12} item container className={cls.Row} style={props}>
+            <Grid xs={1} item className={cls.jsIcon} />
+            <Grid xs={10} item className={cls.Text}>
               <h5>Javascript</h5>
               <span>
                 Javascript - на +/- среднем уровне. В процессе работы, если
@@ -195,22 +208,26 @@ const MySkills = () => {
 
       <Spring from={toggleFrom} to={toggleTo} config={{ duration: 1000 }}>
         {(props) => (
-          <Grid xs={12} container className={cls.Row} style={props}>
-            <Grid xs={1} className={cls.reactIcon} />
-            <Grid xs={10} className={cls.Text}>
+          <Grid xs={12} item container className={cls.Row} style={props}>
+            <Grid xs={1} item className={cls.reactIcon} />
+            <Grid xs={10} item className={cls.Text}>
               <h5>React + Redux</h5>
               <span>
-                Уверенно владею библиотекой Rеact. В процессе работы использую
-                функциональные компоненты. Для управления жизненными циклами
-                использую хуки <span>useState и useEffect</span>, в качестве
-                оптимизации <span>useMemo и useColback</span>. <br />
+                Уверенно владею библиотекой Rеact.
+                <br /> В процессе работы использую функциональные компоненты.
+                Для управления жизненными циклами использую хуки{" "}
+                <span>useState и useEffect</span>, в качестве оптимизации{" "}
+                <span>useMemo, useColback и useContext</span>, <br />
+                для работы с Redux использую хуки{" "}
+                <span>useSelector и useDispatch</span>.
+                <br />
                 Знаком с различными дополнительными библиотеками для работы с
                 React:
-                <br /> Для работы с формами - <span>formik и yap</span>,
+                <br /> Для работы с формами <span>formik и yap</span>,
                 <br /> Для работы с сылками <span>react-router-dom</span>,
-                <br /> Для работы с анимацией -
+                <br /> Для работы с анимацией
                 <span>react-spring и react-tooltip</span>,
-                <br /> Для работы с бизнес логикой -
+                <br /> Для работы с бизнес логикой
                 <span>react-redux и redux-thunk</span>.
                 <br /> Всеми перечисленными инструментами, за исключением Redux
                 владею на базовом уровне. Что касается Redux - то данной
@@ -223,9 +240,9 @@ const MySkills = () => {
 
       <Spring from={toggleFrom} to={toggleTo} config={{ duration: 1000 }}>
         {(props) => (
-          <Grid xs={12} container className={cls.Row} style={props}>
-            <Grid xs={1} className={cls.fwIcon} />
-            <Grid xs={10} className={cls.Text}>
+          <Grid xs={12} item container className={cls.Row} style={props}>
+            <Grid xs={1} item className={cls.fwIcon} />
+            <Grid xs={10} item className={cls.Text}>
               <h5>CSS-фреймворки</h5>
               <span>
                 Из CSS-фреймворков работал с бутстрапом и материалайзом.
@@ -237,9 +254,9 @@ const MySkills = () => {
         )}
       </Spring>
 
-      <Grid xs={12} container className={cls.Row}>
-        <Grid xs={1} className={cls.ppIcon} />
-        <Grid xs={10} className={cls.Text}>
+      <Grid xs={12} item container className={cls.Row}>
+        <Grid xs={1} item className={cls.ppIcon} />
+        <Grid xs={10} item className={cls.Text}>
           <span>
             <h5>CSS и препроцессоры</h5>
             Думаю, что большинство задач средней сложности и немного выше
@@ -249,32 +266,42 @@ const MySkills = () => {
           </span>
         </Grid>
       </Grid>
-      <Grid xs={12} container className={cls.Row}>
-        <Grid xs={1} className={cls.gitIcon} />
-        <Grid xs={10} className={cls.Text}>
+      <Grid xs={12} item container className={cls.Row}>
+        <Grid xs={1} item className={cls.gitIcon} />
+        <Grid xs={10} item className={cls.Text}>
           <h5>Git и Github</h5>
           <span>
             Имею представление о системе контроля версий и как с ней работать на
-            базовм уровне. В частности материалы проекта на котором
-            практиковался выложены в репозиторий на Github (
+            базовм уровне. В частности материалы проектов на которых
+            практиковался выложены в репозиторий на Github:
+            <br />
+            Приложение 1:{" "}
             <a href="https://github.com/Vlad92msk/test.git">
               https://github.com/Vlad92msk/test.git
             </a>
-            ) . Умею получать данные с репозитория, создавать ветки, комитить и
+            <br />
+            Приложение 2:{" "}
+            <a href="https://github.com/Vlad92msk/portfolio.git">
+              https://github.com/Vlad92msk/portfolio.git
+            </a>
+            <br />
+            Умею получать данные с репозитория, создавать ветки, комитить и
             пушить обновления, делать пулреквест. Данные манипуляции в основном
             делал через редактор VSCode.
           </span>
         </Grid>
       </Grid>
-      <Grid xs={12} container className={cls.Row}>
-        <Grid xs={1} className={cls.tsIcon} />
-        <Grid xs={10} className={cls.Text}>
+      <Grid xs={12} item container className={cls.Row}>
+        <Grid xs={1} item className={cls.tsIcon} />
+        <Grid xs={10} item className={cls.Text}>
           <h5>TypeScript</h5>
-          На данный моент в процессе изучения.
+          На базовом уровне владею TypeScript.
+          <br />
+          Данное порфолио(+ Приложение 2) написано с использованием TypeScript.
         </Grid>
       </Grid>
-      <Grid xs={12} container className={cls.Row}>
-        <Grid xs={12} className={cls.Text}>
+      <Grid xs={12} item container className={cls.Row}>
+        <Grid xs={12} item className={cls.Text}>
           <h5>Прочее</h5>
           <span>
             Немного поработал с MySQL и PostgreSQL. На Мускуле создавал
@@ -286,8 +313,8 @@ const MySkills = () => {
           </span>
         </Grid>
       </Grid>
-      <Grid xs={12} container className={cls.Row}>
-        <Grid xs={12} className={cls.Text}>
+      <Grid xs={12} item container className={cls.Row}>
+        <Grid xs={12} item className={cls.Text}>
           <h5>К чему стремлюсь</h5>
           <span>
             В дальнейшем планирую изучить Next.js, GraphQL (Apollo client) и
@@ -302,12 +329,12 @@ const MySkills = () => {
 const Experience = () => {
   return (
     <>
-      <Grid xs={12} className={cls.Skills}>
+      <Grid xs={12} item className={cls.Skills}>
         Опыт работы
       </Grid>
-      <hr style={{ width: "100%", border: "1px solid #fffe0080" }} />
-      <Grid xs={12} container className={cls.Row}>
-        <Grid xs={12} container className={`${cls.Text} ${cls.Row}`}>
+      <hr className={cls.Hr} />
+      <Grid xs={12} item container className={cls.Row}>
+        <Grid xs={12} item container className={`${cls.Text} ${cls.Row}`}>
           <h5>ИФНС №46</h5>
           <span>
             Сначала принимал документы на регистрацию и помогал администраторам
@@ -316,14 +343,14 @@ const Experience = () => {
             заниматься.
           </span>
         </Grid>
-        <Grid xs={12} container className={`${cls.Text} ${cls.Row}`}>
+        <Grid xs={12} item container className={`${cls.Text} ${cls.Row}`}>
           <h5>МФЦ</h5>
           <span>
             Устроившись в МФЦ и проработав там буквально несколько месяцев
             уволился по тем же причинам, что и из 46.
           </span>
         </Grid>
-        <Grid xs={12} container className={`${cls.Text} ${cls.Row}`}>
+        <Grid xs={12} item container className={`${cls.Text} ${cls.Row}`}>
           <h5>МИ ФНС России по ЦОД</h5>
           <span>
             Занимался: <br /> 1. Организацией совещаний в Центральном аппарате
@@ -339,7 +366,7 @@ const Experience = () => {
             уровня. Автоматизировал большую часть работы отдела.
           </span>
         </Grid>
-        <Grid xs={12} container className={`${cls.Text} ${cls.Row}`}>
+        <Grid xs={12} item container className={`${cls.Text} ${cls.Row}`}>
           <h5>МИ ФНС России по ЦОД №2</h5>
           <span>
             После разделения инспекции на 2 ЦОДа, мой отдел перешел в ЦОД №2.
@@ -369,11 +396,11 @@ const Experience = () => {
 const LernProject = () => {
   return (
     <>
-      <Grid xs={12} className={cls.Skills}>
+      <Grid xs={12} item className={cls.Skills}>
         Учебные проекты
       </Grid>
-      <hr style={{ width: "100%", border: "1px solid #fffe0080" }} />
-      <Grid container xs={12} className={cls.Row} justify="space-between">
+      <hr className={cls.Hr} />
+      <Grid container item xs={12} className={cls.Row} justify="space-between">
         <a
           href="https://portfolio-68eec.web.app/"
           style={{ textDecoration: "none", color: "inherit" }}
@@ -401,14 +428,12 @@ const LernProject = () => {
               Практиковал: <br />
               1. TypeScript,
               <br />
-              2. Создание сложных компонентов (Таблица и Форма),
+              2. Material-UI,
               <br />
-              3. Работу с хуками useRef и useContext
+              3. Использование useContext, useDispatch, useSelector
               <br />
             </Box>
-            <Box className={cls.ProjectTitle}>
-              Приложение 2<br /> (в процессе изучения)
-            </Box>
+            <Box className={cls.ProjectTitle}>Приложение 2</Box>
           </Box>
         </NavLink>
       </Grid>

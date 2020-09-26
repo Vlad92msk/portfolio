@@ -2,10 +2,10 @@ import { FormDataType } from "../../../Routes/Application2";
 import { App2_ActionTypes } from "../../Actions/Actions/App2";
 
 const initialState = {
-  rows: [] as Array<FormDataType>,
+  rows: [] as FormDataType[],
 };
 
-export type InitialStateType = typeof initialState;
+type InitialStateType = typeof initialState;
 
 //InitialStateType после скобочек будет говорить о том, какой объект должна вернуть функция, но иногда это может быть избыточно
 export default function app2(

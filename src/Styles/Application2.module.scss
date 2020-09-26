@@ -1,3 +1,7 @@
+@mixin w100 {
+  width: 100%;
+}
+
 .Application2 {
   .FormConteiner {
     position: fixed;
@@ -11,11 +15,11 @@
     background-color: #312d2d;
   }
   .ContainerForTable {
+    @include w100;
     background-color: transparent;
-    width: 100%;
 
     .Table {
-      width: 100%;
+      @include w100;
       background-color: #71717136;
       th {
         color: orange;
@@ -36,11 +40,11 @@
   padding: 10px;
 
   .FieldRow {
-    width: 100%;
+    @include w100;
     padding: 5px;
   }
   .ButtonRow {
-    width: 100%;
+    @include w100;
     display: flex;
     justify-content: center;
     padding: 10px 0;

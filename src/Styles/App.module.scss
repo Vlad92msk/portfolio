@@ -30,6 +30,7 @@
   .Fio {
     font-size: 25px;
     font-weight: 500;
+    color: orange;
   }
   .FrontEnd {
     font-size: 20px;
@@ -123,6 +124,7 @@
     display: flex;
     justify-content: flex-end;
     text-transform: uppercase;
+    color: orange;
   }
   .gitIcon {
     @include icon;
@@ -153,5 +155,9 @@
     @include icon;
     @include hw;
     background-image: url(./icons/ts.png);
+  }
+  .Hr {
+    width: 100%;
+    border: 1px solid #fffe0080;
   }
 }

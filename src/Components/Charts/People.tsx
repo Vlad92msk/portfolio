@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Line } from "react-chartjs-2";
-import { FormDataType } from "../../Routes/Application2";
+import { FormDataType, RowsContext } from "../../Routes/Application2";
 
-type PropsType = {
-  dataChart: Array<FormDataType | null>;
-};
+type PropsType = {};
 
-const PeopleChart: React.FC<PropsType> = ({ dataChart }) => {
+const PeopleChart: React.FC<PropsType> = () => {
+  const dataChart: Array<FormDataType | null> = useContext(RowsContext);
   let years: Array<any> = [];
   dataChart.forEach((t) => {
     t !== null && years.push(t.year);
@@ -40,15 +39,6 @@ const PeopleChart: React.FC<PropsType> = ({ dataChart }) => {
     },
     legend: {
       display: false,
-    },
-    scales: {
-      yAxies: [
-        {
-          ticks: {
-            stepSize: 100,
-          },
-        },
-      ],
     },
   };
 

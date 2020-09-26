@@ -1,13 +1,12 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { FormDataType } from "../../Routes/Application2";
+import { FormDataType, RowsContext } from "../../Routes/Application2";
 
-type PropsType = {
-  dataChart: Array<FormDataType | null>;
-};
+type PropsType = {};
 
-export const SalaryChart: React.FC<PropsType> = ({ dataChart }) => {
+export const SalaryChart: React.FC<PropsType> = () => {
+  const dataChart: Array<FormDataType | null> = useContext(RowsContext);
   let data_schools_church: Array<any> = [];
   const [visibleYear, setVisibleYear] = useState<number>(2015);
   dataChart

@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Line } from "react-chartjs-2";
-import { FormDataType } from "../../Routes/Application2";
+import { FormDataType, RowsContext } from "../../Routes/Application2";
 
-type PropsType = {
-  dataChart: Array<FormDataType | null>;
-};
+type PropsType = {};
 
-export const VvpChart: React.FC<PropsType> = ({ dataChart }) => {
+export const VvpChart: React.FC<PropsType> = () => {
+  const dataChart: Array<FormDataType | null> = useContext(RowsContext);
   let years: Array<any> = [];
   dataChart.forEach((t) => {
     t !== null && years.push(t.year);
@@ -43,15 +42,6 @@ export const VvpChart: React.FC<PropsType> = ({ dataChart }) => {
       labels: {
         fontColor: "rgb(255, 99, 132)",
       },
-    },
-    scales: {
-      yAxies: [
-        {
-          ticks: {
-            stepSize: 1,
-          },
-        },
-      ],
     },
   };
 

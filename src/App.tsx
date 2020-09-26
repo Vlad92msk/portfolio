@@ -3,7 +3,7 @@ import cls from "./Styles/App.module.scss";
 import Grid from "@material-ui/core/Grid";
 import Portfolio from "./Routes/Portfolio";
 import { Route, Switch } from "react-router";
-import Application2 from "./Routes/Application2";
+import { Application2 } from "./Routes/Application2";
 
 function App() {
   return (

@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Bar } from "react-chartjs-2";
-import { FormDataType } from "../../Routes/Application2";
+import { FormDataType, RowsContext } from "../../Routes/Application2";
 
-type PropsType = {
-  dataChart: Array<FormDataType | null>;
-};
+type PropsType = {};
 
-export const SchoolChurch: React.FC<PropsType> = ({ dataChart }) => {
+export const SchoolChurch: React.FC<PropsType> = () => {
+  const dataChart: Array<FormDataType | null> = useContext(RowsContext);
   const myBcgColorChart1 = "red";
   const myBorderColorChart1 = "red";
   let bcgColorArray1 = [];
@@ -68,15 +67,6 @@ export const SchoolChurch: React.FC<PropsType> = ({ dataChart }) => {
       labels: {
         fontColor: "rgb(255, 99, 132)",
       },
-    },
-    scales: {
-      yAxies: [
-        {
-          ticks: {
-            stepSize: 1,
-          },
-        },
-      ],
     },
   };
 

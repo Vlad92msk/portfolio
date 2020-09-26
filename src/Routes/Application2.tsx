@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import cls from "../Styles/Application2.module.scss";
 import Grid from "@material-ui/core/Grid";
 import {
@@ -9,8 +9,13 @@ import {
   TextField,
   Theme,
 } from "@material-ui/core";
-import { connect } from "react-redux";
-import { actions, addRow, getDataTable } from "../store/Actions/Actions/App2";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  actions,
+  addRow,
+  ThunkType,
+  getDataTable,
+} from "../store/Actions/Actions/App2";
 import { AppStateType } from "../store/Reducers/rootReducers";
 import PeopleChart from "../Components/Charts/People";
 import { SchoolChurch } from "../Components/Charts/School_Church";
@@ -22,6 +27,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { useHistory } from "react-router-dom";
 
 //Types========================================
+//Тип для Стейта формы
 export type FormDataType = {
   year: number | null;
   vvp: number | null;
@@ -32,22 +38,13 @@ export type FormDataType = {
   deputy: number | null;
 };
 
-//=============================================
-type MapStatePropsType = {
-  rows: Array<FormDataType | null>;
-};
+//Тип из Материал Юай
 type Anchor = "top" | "left" | "bottom" | "right";
 
-type MapDispatchPropsType = {
-  addDataAction: (state: FormDataType) => void;
-  getDataTable: () => void;
-  addRowinDB: (collection: string, formObj: FormDataType) => void;
-};
+//Типизация Компоненты________
 type OwnPropsType = {};
 
-type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
-//=============================================
-
+//Стили для кнопки Назад
 const useStyles = makeStyles((theme: Theme) => ({
   goToBack: {
     color: "red",
@@ -57,16 +54,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Application2: React.FC<PropsType> = ({
-  addDataAction,
-  rows,
-  getDataTable,
-  addRowinDB,
-}) => {
-  useEffect(() => {
-    getDataTable();
-  }, [getDataTable]);
+//Контекст для Строк
+export const RowsContext = React.createContext<Array<FormDataType | null>>([]);
 
+export const Application2: React.FC<OwnPropsType> = () => {
+  //Props______________________________________________________________________________
+  const rows = useSelector((state: AppStateType) => state.app2.rows);
+
+  const dispatch = useDispatch();
+  const addDataAction = (row: FormDataType) =>
+    dispatch(actions.addDataAction(row));
+  const getDataTables = useCallback((): ThunkType => dispatch(getDataTable()), [
+    dispatch,
+  ]);
+  const addRowinDB = (collection: string, formObj: FormDataType): ThunkType =>
+    dispatch(addRow(collection, formObj));
+  //_____________________________________________________________________________________
+
+  useEffect(() => {
+    getDataTables();
+  }, [getDataTables]);
+
+  //Стейт Формы
   const [formData, setFormData] = useState<FormDataType>({
     year: null,
     vvp: null,
@@ -77,6 +86,7 @@ const Application2: React.FC<PropsType> = ({
     deputy: null,
   });
 
+  //Очистка формы
   const clearFormData = () => {
     setFormData({
       year: null,
@@ -89,6 +99,7 @@ const Application2: React.FC<PropsType> = ({
     });
   };
 
+  //Изменение формы
   const setValue = (e: ChangeEvent<HTMLInputElement>, target: string) => {
     e.persist(); //Без этого почему то рушится страница после 3 ввода...
     const val = +e.target.value;
@@ -99,30 +110,25 @@ const Application2: React.FC<PropsType> = ({
           [target]: val,
         };
       });
-
-    console.log(formData);
   };
+
+  //Кастомная валидация
   const validate = () => {
     let isError = true;
-    if (formData.year !== null && formData.year > 0) {
-      isError = false;
-    } else if (formData.year !== null && formData.vvp === 0) {
-      isError = false;
-    } else if (formData.naselenie !== null && formData.naselenie === 0) {
-      isError = false;
-    } else if (formData.schools !== null && formData.schools === 0) {
-      isError = false;
-    } else if (formData.church !== null && formData.church === 0) {
-      isError = false;
-    } else if (formData.citizens !== null && formData.citizens === 0) {
-      isError = false;
-    } else if (formData.deputy !== null && formData.deputy === 0) {
+    let formDataValue = Object.values(formData);
+    const countError = formDataValue.filter((t) => t === null);
+    if (
+      countError.length === 0 &&
+      formData.year !== null &&
+      formData.year > 2019
+    ) {
       isError = false;
     }
 
     return isError;
   };
 
+  //Отправить форму на сервер
   const addData = () => {
     const er = validate();
 
@@ -133,6 +139,7 @@ const Application2: React.FC<PropsType> = ({
     }
   };
 
+  //Чтото из Материал Юай
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -155,6 +162,8 @@ const Application2: React.FC<PropsType> = ({
   };
 
   const classes = useStyles();
+
+  //Доступ к адресной строке
   let history = useHistory();
 
   return (
@@ -281,25 +290,27 @@ const Application2: React.FC<PropsType> = ({
         ))}
       </div>
       <Grid container xs={12} justify="center" style={{ padding: "60px" }}>
-        <div className={cls.ChartBox}>
-          <VvpChart dataChart={rows} />
-        </div>
-        <div className={cls.ChartBox}>
-          <SchoolChurch dataChart={rows} />
-        </div>
-        <div className={cls.ChartBox}>
-          <PeopleChart dataChart={rows} />
-        </div>
-        <div
-          className={cls.ChartBox}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <SalaryChart dataChart={rows} />
-        </div>
+        <RowsContext.Provider value={rows}>
+          <div className={cls.ChartBox}>
+            <VvpChart />
+          </div>
+          <div className={cls.ChartBox}>
+            <SchoolChurch />
+          </div>
+          <div className={cls.ChartBox}>
+            <PeopleChart />
+          </div>
+          <div
+            className={cls.ChartBox}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <SalaryChart />
+          </div>
+        </RowsContext.Provider>
       </Grid>
       <Grid container xs={12} justify="center" style={{ padding: "60px" }}>
         <EnhancedTable data={rows} />
@@ -307,20 +318,3 @@ const Application2: React.FC<PropsType> = ({
     </Grid>
   );
 };
-
-export default connect<
-  MapStatePropsType,
-  MapDispatchPropsType,
-  OwnPropsType,
-  AppStateType
->(
-  (state) => ({
-    rows: state.app2.rows,
-  }),
-  (dispatch: any) => ({
-    addDataAction: (row) => dispatch(actions.addDataAction(row)),
-    getDataTable: () => dispatch(getDataTable()),
-    addRowinDB: (collection: string, formObj: FormDataType) =>
-      dispatch(addRow(collection, formObj)),
-  })
-)(Application2);
